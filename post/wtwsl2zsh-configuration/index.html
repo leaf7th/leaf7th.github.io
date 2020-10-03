@@ -2,18 +2,20 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>About me | Gridea</title>
+<title>WT+WSL2+zsh configuration | Gridea</title>
 <link rel="shortcut icon" href="https://leaf7th.github.io/favicon.ico?v=1601689123052">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://leaf7th.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="About me | Gridea - Atom Feed" href="https://leaf7th.github.io/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="WT+WSL2+zsh configuration | Gridea - Atom Feed" href="https://leaf7th.github.io/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="I'm Nook, welcome to my blog 🤝
-🏠 About
-This site is a static blog based on Gridea, recording some of my technical essa..." />
+    <meta name="description" content="Windows Terminal+WSL2真的很好用，不过需要美化一下
+WSL2
+## Install the Windows Subsystem for Linux
+Windows terminal
+下载很简单，Windows store..." />
     <meta name="keywords" content="" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
@@ -76,33 +78,60 @@ This site is a static blog based on Gridea, recording some of my technical essa.
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              About me
+              WT+WSL2+zsh configuration
             </h2>
             <div class="post-info">
               <span>
-                2019-01-25
+                2020-10-03
               </span>
               <span>
-                1 min read
+                2 min read
               </span>
               
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p>I'm Nook, welcome to my blog 🤝</p>
-<h2 id="about">🏠 About</h2>
-<p>This site is a static blog based on Gridea, recording some of my technical essays.</p>
-<h2 id="contact">📬 Contact</h2>
-<p><a href="mailto:slomo7@outlook.com">slomo7@outlook.com</a></p>
+                <p>Windows Terminal+WSL2真的很好用，不过需要美化一下</p>
+<h2 id="wsl2">WSL2</h2>
+<p><a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10">## Install the Windows Subsystem for Linux</a></p>
+<h2 id="windows-terminal">Windows terminal</h2>
+<p>下载很简单，Windows store直接下载，接下来是配置</p>
+<p><a href="https://docs.microsoft.com/en-us/windows/terminal/customize-settings/profile-settings">Profile settings in Windows Terminal</a></p>
+<p><a href="https://atomcorp.github.io/themes/">可视化的 Windows Terminal 配色方案选择器</a></p>
+<h2 id="zsh">Zsh</h2>
+<pre><code class="language-bash">sudo apt install zsh # Install
+
+chsh -s /bin/zsh # Set to defalut shell
+
+sh -c &quot;$(wget https://raw.github.com/robbyrussell/oh-myzsh/master/tools/install.sh -O -)&quot; # On-my-zsh
+
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting # Plugins
+mkdir ~/.oh-my-zsh/plugins/incr
+wget http://mimosa-pudica.net/src/incr-0.2.zsh -O ~/.oh-myzsh/plugins/incr/incr.plugin.zsh
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-myzsh/custom}/plugins/zsh-autosuggestions
+sudo apt install autojump
+</code></pre>
+<p>然后 <code>vim .zshrc</code></p>
+<p>修改 <code>plugins=(git zsh-syntax-highlighting)</code></p>
+<p>添加</p>
+<pre><code class="language-bash">source ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zshautosuggestions.plugin.zsh
+source /usr/share/autojump/autojump.sh
+source ~/.oh-my-zsh/plugins/incr/incr*.zsh
+</code></pre>
+<h2 id="oh-my-posh-and-fonts">Oh-my-posh and fonts</h2>
+<p><a href="https://docs.microsoft.com/en-us/windows/terminal/tutorials/powerline-setup">Tutorial: Set up Powerline in Windows Terminal</a></p>
+<p>字体同样设置给WSL2</p>
 
               </div>
               <div class="toc-container">
                 <ul class="markdownIt-TOC">
 <li>
 <ul>
-<li><a href="#about">🏠 About</a></li>
-<li><a href="#contact">📬 Contact</a></li>
+<li><a href="#wsl2">WSL2</a></li>
+<li><a href="#windows-terminal">Windows terminal</a></li>
+<li><a href="#zsh">Zsh</a></li>
+<li><a href="#oh-my-posh-and-fonts">Oh-my-posh and fonts</a></li>
 </ul>
 </li>
 </ul>
@@ -112,6 +141,15 @@ This site is a static blog based on Gridea, recording some of my technical essa.
           </article>
         </div>
 
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://leaf7th.github.io/post/writeup-hackthebox-openadmin/">
+              <h3 class="post-title">
+                Writeup-HackTheBox-OpenAdmin
+              </h3>
+            </a>
+          </div>
         
 
         

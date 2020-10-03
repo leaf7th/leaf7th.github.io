@@ -1,60 +1,98 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://leaf7th.github.io</id>
-    <title>Gridea</title>
-    <updated>2020-10-03T01:39:03.306Z</updated>
-    <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://leaf7th.github.io"/>
-    <link rel="self" href="https://leaf7th.github.io/atom.xml"/>
-    <subtitle>温故而知新</subtitle>
-    <logo>https://leaf7th.github.io/images/avatar.png</logo>
-    <icon>https://leaf7th.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2020, Gridea</rights>
-    <entry>
-        <title type="html"><![CDATA[WT+WSL2+zsh configuration]]></title>
-        <id>https://leaf7th.github.io/post/wtwsl2zsh-configuration/</id>
-        <link href="https://leaf7th.github.io/post/wtwsl2zsh-configuration/">
-        </link>
-        <updated>2020-10-03T03:38:07.000Z</updated>
-        <content type="html"><![CDATA[<p>Windows Terminal+WSL2真的很好用，不过需要美化一下</p>
-<h2 id="wsl2">WSL2</h2>
-<p><a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10">## Install the Windows Subsystem for Linux</a></p>
-<h2 id="windows-terminal">Windows terminal</h2>
-<p>下载很简单，Windows store直接下载，接下来是配置</p>
-<p><a href="https://docs.microsoft.com/en-us/windows/terminal/customize-settings/profile-settings">Profile settings in Windows Terminal</a></p>
-<p><a href="https://atomcorp.github.io/themes/">可视化的 Windows Terminal 配色方案选择器</a></p>
-<h2 id="zsh">Zsh</h2>
-<pre><code class="language-bash">sudo apt install zsh # Install
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Writeup-HackTheBox-OpenAdmin | Gridea</title>
+<link rel="shortcut icon" href="https://leaf7th.github.io/favicon.ico?v=1601689123052">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://leaf7th.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Writeup-HackTheBox-OpenAdmin | Gridea - Atom Feed" href="https://leaf7th.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
-chsh -s /bin/zsh # Set to defalut shell
 
-sh -c &quot;$(wget https://raw.github.com/robbyrussell/oh-myzsh/master/tools/install.sh -O -)&quot; # On-my-zsh
 
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting # Plugins
-mkdir ~/.oh-my-zsh/plugins/incr
-wget http://mimosa-pudica.net/src/incr-0.2.zsh -O ~/.oh-myzsh/plugins/incr/incr.plugin.zsh
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-myzsh/custom}/plugins/zsh-autosuggestions
-sudo apt install autojump
-</code></pre>
-<p>然后 <code>vim .zshrc</code></p>
-<p>修改 <code>plugins=(git zsh-syntax-highlighting)</code></p>
-<p>添加</p>
-<pre><code class="language-bash">source ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zshautosuggestions.plugin.zsh
-source /usr/share/autojump/autojump.sh
-source ~/.oh-my-zsh/plugins/incr/incr*.zsh
-</code></pre>
-<h2 id="oh-my-posh-and-fonts">Oh-my-posh and fonts</h2>
-<p><a href="https://docs.microsoft.com/en-us/windows/terminal/tutorials/powerline-setup">Tutorial: Set up Powerline in Windows Terminal</a></p>
-<p>字体同样设置给WSL2</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Writeup-HackTheBox-OpenAdmin]]></title>
-        <id>https://leaf7th.github.io/post/writeup-hackthebox-openadmin/</id>
-        <link href="https://leaf7th.github.io/post/writeup-hackthebox-openadmin/">
-        </link>
-        <updated>2020-01-09T02:00:00.000Z</updated>
-        <content type="html"><![CDATA[<p>感谢Richard推荐的这台Beginner machine，以及整个过程中的提示与帮助</p>
+    <meta name="description" content="感谢Richard推荐的这台Beginner machine，以及整个过程中的提示与帮助
+Foothold
+渗透HTB的Machine要先连接他们的VPN，一开始忘了这个浪费好多时间
+openvpn Divinook.ovpn
+拿到机器IP..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://leaf7th.github.io">
+  <img class="avatar" src="https://leaf7th.github.io/images/avatar.png?v=1601689123052" alt="">
+  </a>
+  <h1 class="site-title">
+    Gridea
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Writeup-HackTheBox-OpenAdmin
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-01-09
+              </span>
+              <span>
+                7 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>感谢Richard推荐的这台Beginner machine，以及整个过程中的提示与帮助</p>
 <h2 id="foothold">Foothold</h2>
 <p>渗透HTB的Machine要先连接他们的VPN，一开始忘了这个浪费好多时间</p>
 <p><code>openvpn Divinook.ovpn</code></p>
@@ -220,6 +258,79 @@ sudo nano /opt/priv
 <h2 id="conclusion">Conclusion</h2>
 <p>任何网上找到的脚本，尽量读懂再用。</p>
 <p>多看多想，涉及到开源app记得去读代码找漏洞。</p>
-]]></content>
-    </entry>
-</feed>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#foothold">Foothold</a></li>
+<li><a href="#user1">User1</a></li>
+<li><a href="#user2">User2</a></li>
+<li><a href="#root">Root</a></li>
+<li><a href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://leaf7th.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
