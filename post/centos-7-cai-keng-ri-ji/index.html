@@ -2,19 +2,20 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>About | Nook&#39;s blog</title>
+<title>Centos 7 踩坑日记 | Nook&#39;s blog</title>
 <link rel="shortcut icon" href="https://leaf7th.github.io/favicon.ico?v=1601792442135">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://leaf7th.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="About | Nook&#39;s blog - Atom Feed" href="https://leaf7th.github.io/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="Centos 7 踩坑日记 | Nook&#39;s blog - Atom Feed" href="https://leaf7th.github.io/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="I'm Nook, welcome to my blog 🤝
-🏠 About
-This site is a static blog based on Gridea, recording some of my notes
-📬 Conta..." />
+    <meta name="description" content="前言
+在Oracle cloud上有台永久免费的服务器，当初部署的是centos 7，Oracle cloud有个缺点就是不能重装系统，只能放弃apt的便捷了。
+安装Python3.8
+踩坑命令
+sudo yum install gcc o..." />
     <meta name="keywords" content="" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
@@ -77,33 +78,56 @@ This site is a static blog based on Gridea, recording some of my notes
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              About
+              Centos 7 踩坑日记
             </h2>
             <div class="post-info">
               <span>
-                2019-01-26
+                2020-10-04
               </span>
               <span>
-                1 min read
+                2 min read
               </span>
               
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p>I'm Nook, welcome to my blog 🤝</p>
-<h2 id="about">🏠 About</h2>
-<p>This site is a static blog based on Gridea, recording some of my notes</p>
-<h2 id="contact">📬 Contact</h2>
-<p><a href="mailto:slomo7@outlook.com">slomo7@outlook.com</a></p>
+                <h1 id="前言">前言</h1>
+<p>在Oracle cloud上有台永久免费的服务器，当初部署的是centos 7，Oracle cloud有个缺点就是不能重装系统，只能放弃apt的便捷了。</p>
+<h1 id="安装python38">安装Python3.8</h1>
+<h2 id="踩坑命令">踩坑命令</h2>
+<pre><code class="language-bash">sudo yum install gcc openssl-devel bzip2-devel libffi-devel
+cd /opt
+wget https://www.python.org/ftp/python/3.8.5/Python-3.8.5.tgz
+tar xzf Python-3.8.5.tgz
+cd Python-3.8.5
+sudo ./configure --enable-optimizations
+sudo make altinstall
+</code></pre>
+<h2 id="问题">问题</h2>
+<p>编译的Python不完整，缺少sqlite，lzma等包</p>
+<h2 id="正确步骤">正确步骤</h2>
+<pre><code class="language-bash">sudo yum -y groupinstall &quot;Development tools&quot;
+sudo yum -y install zlib-devel bzip2-devel openssl-devel ncurses-devel sudo sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel
+sudo yum install -y libffi-devel zlib1g-dev
+sudo yum install zlib* -y
+cd /opt
+wget https://www.python.org/ftp/python/3.8.5/Python-3.8.5.tgz
+tar xzf Python-3.8.5.tgz
+cd Python-3.8.5
+sudo ./configure --enable-optimizations
+sudo make altinstall
+</code></pre>
 
               </div>
               <div class="toc-container">
                 <ul class="markdownIt-TOC">
-<li>
+<li><a href="#%E5%89%8D%E8%A8%80">前言</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85python38">安装Python3.8</a>
 <ul>
-<li><a href="#about">🏠 About</a></li>
-<li><a href="#contact">📬 Contact</a></li>
+<li><a href="#%E8%B8%A9%E5%9D%91%E5%91%BD%E4%BB%A4">踩坑命令</a></li>
+<li><a href="#%E9%97%AE%E9%A2%98">问题</a></li>
+<li><a href="#%E6%AD%A3%E7%A1%AE%E6%AD%A5%E9%AA%A4">正确步骤</a></li>
 </ul>
 </li>
 </ul>
@@ -113,6 +137,15 @@ This site is a static blog based on Gridea, recording some of my notes
           </article>
         </div>
 
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://leaf7th.github.io/post/wtwsl2zsh-configuration/">
+              <h3 class="post-title">
+                WT+WSL2+zsh configuration
+              </h3>
+            </a>
+          </div>
         
 
         

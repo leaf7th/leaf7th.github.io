@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://leaf7th.github.io</id>
     <title>Nook&apos;s blog</title>
-    <updated>2020-10-03T01:57:34.636Z</updated>
+    <updated>2020-10-04T06:20:45.324Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://leaf7th.github.io"/>
     <link rel="self" href="https://leaf7th.github.io/atom.xml"/>
@@ -10,6 +10,40 @@
     <logo>https://leaf7th.github.io/images/avatar.png</logo>
     <icon>https://leaf7th.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Nook&apos;s blog</rights>
+    <entry>
+        <title type="html"><![CDATA[Centos 7 踩坑日记]]></title>
+        <id>https://leaf7th.github.io/post/centos-7-cai-keng-ri-ji/</id>
+        <link href="https://leaf7th.github.io/post/centos-7-cai-keng-ri-ji/">
+        </link>
+        <updated>2020-10-04T08:00:57.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="前言">前言</h1>
+<p>在Oracle cloud上有台永久免费的服务器，当初部署的是centos 7，Oracle cloud有个缺点就是不能重装系统，只能放弃apt的便捷了。</p>
+<h1 id="安装python38">安装Python3.8</h1>
+<h2 id="踩坑命令">踩坑命令</h2>
+<pre><code class="language-bash">sudo yum install gcc openssl-devel bzip2-devel libffi-devel
+cd /opt
+wget https://www.python.org/ftp/python/3.8.5/Python-3.8.5.tgz
+tar xzf Python-3.8.5.tgz
+cd Python-3.8.5
+sudo ./configure --enable-optimizations
+sudo make altinstall
+</code></pre>
+<h2 id="问题">问题</h2>
+<p>编译的Python不完整，缺少sqlite，lzma等包</p>
+<h2 id="正确步骤">正确步骤</h2>
+<pre><code class="language-bash">sudo yum -y groupinstall &quot;Development tools&quot;
+sudo yum -y install zlib-devel bzip2-devel openssl-devel ncurses-devel sudo sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel
+sudo yum install -y libffi-devel zlib1g-dev
+sudo yum install zlib* -y
+cd /opt
+wget https://www.python.org/ftp/python/3.8.5/Python-3.8.5.tgz
+tar xzf Python-3.8.5.tgz
+cd Python-3.8.5
+sudo ./configure --enable-optimizations
+sudo make altinstall
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[WT+WSL2+zsh configuration]]></title>
         <id>https://leaf7th.github.io/post/wtwsl2zsh-configuration/</id>
