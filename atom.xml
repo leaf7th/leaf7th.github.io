@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://leaf7th.github.io</id>
     <title>Nook&apos;s blog</title>
-    <updated>2020-10-09T16:06:01.335Z</updated>
+    <updated>2020-10-09T16:13:38.270Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://leaf7th.github.io"/>
     <link rel="self" href="https://leaf7th.github.io/atom.xml"/>
@@ -15,7 +15,7 @@
         <id>https://leaf7th.github.io/post/windows-zhe-teng-ri-ji/</id>
         <link href="https://leaf7th.github.io/post/windows-zhe-teng-ri-ji/">
         </link>
-        <updated>2020-10-09T21:12:50.000Z</updated>
+        <updated>2020-10-09T23:12:50.000Z</updated>
         <content type="html"><![CDATA[<h1 id="前言">前言</h1>
 <p>Windows下很多问题折腾起来太费劲了，记录一下踩过的坑</p>
 <h1 id="ssh-key-bad-permission">SSH key bad permission</h1>
@@ -27,8 +27,7 @@
 <figure data-type="image" tabindex="1"><img src="https://leaf7th.github.io/post-images/1602257222602.jpg" alt="错误提示" loading="lazy"></figure>
 <p>因此我们需要更换另一个办法来解决问题。</p>
 <p>CLI方式：</p>
-<pre><code class="language-powershell">
-# Set Variable
+<pre><code class="language-powershell"># Set Variable
 $key=&quot;C:\Path\to\keyfile&quot;
 
 # Remove Inheritance
@@ -85,15 +84,16 @@ sudo make altinstall
         <id>https://leaf7th.github.io/post/wtwsl2zsh-configuration/</id>
         <link href="https://leaf7th.github.io/post/wtwsl2zsh-configuration/">
         </link>
-        <updated>2020-08-28T08:00:00.000Z</updated>
-        <content type="html"><![CDATA[<p>Windows Terminal+WSL2真的很好用，不过需要美化一下</p>
-<h2 id="wsl2">WSL2</h2>
+        <updated>2020-08-28T12:00:00.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="前言">前言</h1>
+<p>本文记录了一些Windows Terminal+WSL2的配置方法</p>
+<h1 id="wsl2">WSL2</h1>
 <p><a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10">## Install the Windows Subsystem for Linux</a></p>
-<h2 id="windows-terminal">Windows terminal</h2>
+<h1 id="windows-terminal">Windows Terminal</h1>
 <p>下载很简单，Windows store直接下载，接下来是配置</p>
 <p><a href="https://docs.microsoft.com/en-us/windows/terminal/customize-settings/profile-settings">Profile settings in Windows Terminal</a></p>
 <p><a href="https://atomcorp.github.io/themes/">可视化的 Windows Terminal 配色方案选择器</a></p>
-<h2 id="zsh">Zsh</h2>
+<h1 id="zsh">Zsh</h1>
 <pre><code class="language-bash">sudo apt install zsh # Install
 
 chsh -s /bin/zsh # Set to defalut shell
@@ -113,16 +113,19 @@ sudo apt install autojump
 source /usr/share/autojump/autojump.sh
 source ~/.oh-my-zsh/plugins/incr/incr*.zsh
 </code></pre>
-<h2 id="oh-my-posh-and-fonts">Oh-my-posh and fonts</h2>
+<h1 id="powershell">Powershell</h1>
+<h2 id="powershell-7">Powershell 7</h2>
+<p><a href="https://docs.microsoft.com/zh-cn/powershell/scripting/install/installing-powershell-core-on-windows?view=powershell-7">在 Windows 上安装 PowerShell</a></p>
+<h2 id="powerline">Powerline</h2>
 <p><a href="https://docs.microsoft.com/en-us/windows/terminal/tutorials/powerline-setup">Tutorial: Set up Powerline in Windows Terminal</a></p>
 <p>字体同样设置给WSL2</p>
 <h2 id="配置ssh-tab">配置SSH Tab</h2>
-<p>处理私钥权限问题，详见<a href="http://google.com">Windowns 折腾日记</a></p>
+<p>处理私钥权限问题，详见<a href="https://leaf7th.github.io/post/windows-zhe-teng-ri-ji/#ssh-key-bad-permission">Windowns 折腾日记</a></p>
 <p>在Windows Terminal的<code>setting.json</code>中添加</p>
 <pre><code>{
     &quot;guid&quot;: &quot;{xxxx}&quot;,
     &quot;hidden&quot;: false,
-    &quot;name&quot;: &quot;Oracle-Sydney&quot;,
+    &quot;name&quot;: &quot;Tabname&quot;,
     &quot;colorScheme&quot;: &quot;WildCherry&quot;,
     &quot;commandline&quot; : &quot;ssh command&quot;
 }
