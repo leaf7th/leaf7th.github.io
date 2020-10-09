@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://leaf7th.github.io</id>
     <title>Nook&apos;s blog</title>
-    <updated>2020-10-04T06:20:45.324Z</updated>
+    <updated>2020-10-09T16:06:01.335Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://leaf7th.github.io"/>
     <link rel="self" href="https://leaf7th.github.io/atom.xml"/>
@@ -11,11 +11,47 @@
     <icon>https://leaf7th.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Nook&apos;s blog</rights>
     <entry>
+        <title type="html"><![CDATA[Windows 折腾日记]]></title>
+        <id>https://leaf7th.github.io/post/windows-zhe-teng-ri-ji/</id>
+        <link href="https://leaf7th.github.io/post/windows-zhe-teng-ri-ji/">
+        </link>
+        <updated>2020-10-09T21:12:50.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="前言">前言</h1>
+<p>Windows下很多问题折腾起来太费劲了，记录一下踩过的坑</p>
+<h1 id="ssh-key-bad-permission">SSH key bad permission</h1>
+<p>Windows下也可以使用openssh来进行ssh连接，但是在使用private key的时候会碰到bad permission的问题。在Linux下这个问题非常容易解决，只需要 <code>chmod 600 keyname</code> 就好了，但是Windows的权限管理非常麻烦。</p>
+<p>一个普遍的解决办法是：</p>
+<p><code>右键点击Key→属性→安全→高级</code></p>
+<p>然后将所有者更改为当前用户，禁用继承，删除所有权限并为当前账户添加权限</p>
+<p>但是这个办法有一些小问题，当使用Microsoft用户登录Windows的时候，当前用户是<code>AzureAD\AccountName</code>，而这个用户是无法直接直接在Obeject Picker UI中选择的。</p>
+<figure data-type="image" tabindex="1"><img src="https://leaf7th.github.io/post-images/1602257222602.jpg" alt="错误提示" loading="lazy"></figure>
+<p>因此我们需要更换另一个办法来解决问题。</p>
+<p>CLI方式：</p>
+<pre><code class="language-powershell">
+# Set Variable
+$key=&quot;C:\Path\to\keyfile&quot;
+
+# Remove Inheritance
+icacls ${key} /c /t /Inheritance:d
+
+# Set Ownership to Owner
+icacls ${key} /c /t /grant ${env:UserName}:F
+
+# Remove All Users, except for Owner
+icacls ${key} /c /t /Remove Administrator &quot;Authenticated Users&quot; BUILTIN\Administrators BUILTIN Everyone System Users
+
+# Verify
+icacls ${key}
+</code></pre>
+<p>这样就可以正确的设置private key权限了。</p>
+]]></content>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[Centos 7 踩坑日记]]></title>
         <id>https://leaf7th.github.io/post/centos-7-cai-keng-ri-ji/</id>
         <link href="https://leaf7th.github.io/post/centos-7-cai-keng-ri-ji/">
         </link>
-        <updated>2020-10-04T08:00:57.000Z</updated>
+        <updated>2020-10-04T10:00:57.000Z</updated>
         <content type="html"><![CDATA[<h1 id="前言">前言</h1>
 <p>在Oracle cloud上有台永久免费的服务器，当初部署的是centos 7，Oracle cloud有个缺点就是不能重装系统，只能放弃apt的便捷了。</p>
 <h1 id="安装python38">安装Python3.8</h1>
@@ -45,11 +81,11 @@ sudo make altinstall
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[WT+WSL2+zsh configuration]]></title>
+        <title type="html"><![CDATA[Windows Terminal+WSL2+Zsh configuration]]></title>
         <id>https://leaf7th.github.io/post/wtwsl2zsh-configuration/</id>
         <link href="https://leaf7th.github.io/post/wtwsl2zsh-configuration/">
         </link>
-        <updated>2020-08-28T04:00:00.000Z</updated>
+        <updated>2020-08-28T08:00:00.000Z</updated>
         <content type="html"><![CDATA[<p>Windows Terminal+WSL2真的很好用，不过需要美化一下</p>
 <h2 id="wsl2">WSL2</h2>
 <p><a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10">## Install the Windows Subsystem for Linux</a></p>
@@ -80,6 +116,18 @@ source ~/.oh-my-zsh/plugins/incr/incr*.zsh
 <h2 id="oh-my-posh-and-fonts">Oh-my-posh and fonts</h2>
 <p><a href="https://docs.microsoft.com/en-us/windows/terminal/tutorials/powerline-setup">Tutorial: Set up Powerline in Windows Terminal</a></p>
 <p>字体同样设置给WSL2</p>
+<h2 id="配置ssh-tab">配置SSH Tab</h2>
+<p>处理私钥权限问题，详见<a href="http://google.com">Windowns 折腾日记</a></p>
+<p>在Windows Terminal的<code>setting.json</code>中添加</p>
+<pre><code>{
+    &quot;guid&quot;: &quot;{xxxx}&quot;,
+    &quot;hidden&quot;: false,
+    &quot;name&quot;: &quot;Oracle-Sydney&quot;,
+    &quot;colorScheme&quot;: &quot;WildCherry&quot;,
+    &quot;commandline&quot; : &quot;ssh command&quot;
+}
+</code></pre>
+<p>其中，commandline用于处填写ssh命令，guid使用<a href="https://www.guidgen.com/">Create GUIDs online</a>来生成。</p>
 ]]></content>
     </entry>
     <entry>
