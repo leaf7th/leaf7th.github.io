@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Windows 折腾日记 | Nook&#39;s blog</title>
-<link rel="shortcut icon" href="https://leaf7th.github.io/favicon.ico?v=1603645066235">
+<link rel="shortcut icon" href="https://leaf7th.github.io/favicon.ico?v=1603645135552">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://leaf7th.github.io/styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="Windows 折腾日记 | Nook&#39;s blog - Atom Feed" href="https://leaf7th.github.io/atom.xml">
@@ -26,7 +26,7 @@ Windows Terminal
       <div class="main-content">
         <div class="site-header">
   <a href="https://leaf7th.github.io">
-  <img class="avatar" src="https://leaf7th.github.io/images/avatar.png?v=1603645066235" alt="">
+  <img class="avatar" src="https://leaf7th.github.io/images/avatar.png?v=1603645135552" alt="">
   </a>
   <h1 class="site-title">
     Nook&#39;s blog
@@ -148,7 +148,7 @@ icacls ${key}
 <h2 id="powerline">Powerline</h2>
 <p><a href="https://docs.microsoft.com/en-us/windows/terminal/tutorials/powerline-setup">Tutorial: Set up Powerline in Windows Terminal</a></p>
 <p>字体同样设置给WSL2</p>
-<h2 id="device-or-resource-busy">Device or resource busy</h2>
+<h1 id="device-or-resource-busy">Device or resource busy</h1>
 <p>如果使用Docker-desktop+WSL2来运行容器并挂载到WSL2目录，那么在删除容器后该目录会一直无法删除，提示Device or resource busy。</p>
 <p>常用的方法是<code>lsof +D path</code>和<code>umount path</code>，无效</p>
 <p>用<code>docker volume rm $(docker volume ls -qf dangling=true)</code>删除孤单卷，无效</p>
@@ -170,9 +170,9 @@ icacls ${key}
 <ul>
 <li><a href="#powershell-7">Powershell 7</a></li>
 <li><a href="#powerline">Powerline</a></li>
-<li><a href="#device-or-resource-busy">Device or resource busy</a></li>
 </ul>
 </li>
+<li><a href="#device-or-resource-busy">Device or resource busy</a></li>
 <li><a href="#wsl2%E4%B8%AD%E7%9A%84vim">WSL2中的Vim</a></li>
 </ul>
 

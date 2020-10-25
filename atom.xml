@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://leaf7th.github.io</id>
     <title>Nook&apos;s blog</title>
-    <updated>2020-10-25T16:57:47.899Z</updated>
+    <updated>2020-10-25T16:58:57.518Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://leaf7th.github.io"/>
     <link rel="self" href="https://leaf7th.github.io/atom.xml"/>
@@ -15,7 +15,7 @@
         <id>https://leaf7th.github.io/post/windows-zhe-teng-ri-ji/</id>
         <link href="https://leaf7th.github.io/post/windows-zhe-teng-ri-ji/">
         </link>
-        <updated>2020-10-10T11:12:50.000Z</updated>
+        <updated>2020-10-10T13:12:50.000Z</updated>
         <content type="html"><![CDATA[<h1 id="前言">前言</h1>
 <p>Windows下很多问题折腾起来太费劲了，记录一下踩过的坑</p>
 <h1 id="wsl2">WSL2</h1>
@@ -67,7 +67,7 @@ icacls ${key}
 <h2 id="powerline">Powerline</h2>
 <p><a href="https://docs.microsoft.com/en-us/windows/terminal/tutorials/powerline-setup">Tutorial: Set up Powerline in Windows Terminal</a></p>
 <p>字体同样设置给WSL2</p>
-<h2 id="device-or-resource-busy">Device or resource busy</h2>
+<h1 id="device-or-resource-busy">Device or resource busy</h1>
 <p>如果使用Docker-desktop+WSL2来运行容器并挂载到WSL2目录，那么在删除容器后该目录会一直无法删除，提示Device or resource busy。</p>
 <p>常用的方法是<code>lsof +D path</code>和<code>umount path</code>，无效</p>
 <p>用<code>docker volume rm $(docker volume ls -qf dangling=true)</code>删除孤单卷，无效</p>
