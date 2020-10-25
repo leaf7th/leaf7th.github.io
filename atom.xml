@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://leaf7th.github.io</id>
     <title>Nook&apos;s blog</title>
-    <updated>2020-10-09T16:13:38.270Z</updated>
+    <updated>2020-10-25T16:55:51.327Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://leaf7th.github.io"/>
     <link rel="self" href="https://leaf7th.github.io/atom.xml"/>
@@ -15,9 +15,15 @@
         <id>https://leaf7th.github.io/post/windows-zhe-teng-ri-ji/</id>
         <link href="https://leaf7th.github.io/post/windows-zhe-teng-ri-ji/">
         </link>
-        <updated>2020-10-09T23:12:50.000Z</updated>
+        <updated>2020-10-10T09:12:50.000Z</updated>
         <content type="html"><![CDATA[<h1 id="前言">前言</h1>
 <p>Windows下很多问题折腾起来太费劲了，记录一下踩过的坑</p>
+<h1 id="wsl2">WSL2</h1>
+<p><a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10">## Install the Windows Subsystem for Linux</a></p>
+<h1 id="windows-terminal">Windows Terminal</h1>
+<p>下载很简单，Windows store直接下载，接下来是配置</p>
+<p><a href="https://docs.microsoft.com/en-us/windows/terminal/customize-settings/profile-settings">Profile settings in Windows Terminal</a></p>
+<p><a href="https://atomcorp.github.io/themes/">可视化的 Windows Terminal 配色方案选择器</a></p>
 <h1 id="ssh-key-bad-permission">SSH key bad permission</h1>
 <p>Windows下也可以使用openssh来进行ssh连接，但是在使用private key的时候会碰到bad permission的问题。在Linux下这个问题非常容易解决，只需要 <code>chmod 600 keyname</code> 就好了，但是Windows的权限管理非常麻烦。</p>
 <p>一个普遍的解决办法是：</p>
@@ -43,6 +49,33 @@ icacls ${key} /c /t /Remove Administrator &quot;Authenticated Users&quot; BUILTI
 icacls ${key}
 </code></pre>
 <p>这样就可以正确的设置private key权限了。</p>
+<h1 id="配置ssh-tab">配置SSH Tab</h1>
+<p>处理私钥权限问题，详见<a href="https://leaf7th.github.io/post/windows-zhe-teng-ri-ji/#ssh-key-bad-permission"> SSH key bad permission </a></p>
+<p>在Windows Terminal的<code>setting.json</code>中添加</p>
+<pre><code>{
+    &quot;guid&quot;: &quot;{xxxx}&quot;,
+    &quot;hidden&quot;: false,
+    &quot;name&quot;: &quot;Tabname&quot;,
+    &quot;colorScheme&quot;: &quot;WildCherry&quot;,
+    &quot;commandline&quot; : &quot;ssh command&quot;
+}
+</code></pre>
+<p>其中，commandline用于处填写ssh命令，guid使用<a href="https://www.guidgen.com/">Create GUIDs online</a>来生成。</p>
+<h1 id="powershell">Powershell</h1>
+<h2 id="powershell-7">Powershell 7</h2>
+<p><a href="https://docs.microsoft.com/zh-cn/powershell/scripting/install/installing-powershell-core-on-windows?view=powershell-7">在 Windows 上安装 PowerShell</a></p>
+<h2 id="powerline">Powerline</h2>
+<p><a href="https://docs.microsoft.com/en-us/windows/terminal/tutorials/powerline-setup">Tutorial: Set up Powerline in Windows Terminal</a></p>
+<p>字体同样设置给WSL2</p>
+<h2 id="device-or-resource-busy">Device or resource busy</h2>
+<p>如果使用Docker-desktop+WSL2来运行容器并挂载到WSL2目录，那么在删除容器后该目录会一直无法删除，提示Device or resource busy。</p>
+<p>常用的方法是<code>lsof +D path</code>和<code>umount path</code>，无效</p>
+<p>用<code>docker volume rm $(docker volume ls -qf dangling=true)</code>删除孤单卷，无效</p>
+<p>在proc中的mountinfo可以看到忙碌目录挂载到了windows中，所以关闭Docker-desktop即可删除</p>
+<h1 id="wsl2中的vim">WSL2中的Vim</h1>
+<p>WT的自定义主题可以让shell看起来更漂亮，但是这会影响vim中语法高亮错误提示的效果。</p>
+<p>一个简单的解决办法是，尝试一种能和当前Terminal主题适应的比较好的vim主题并微调</p>
+<p>另一个解决办法是开启vim的真彩色。因为Terminal主题中更改的是0~15的颜色映射，如果终端支持真彩色，那么vim就可以使用16以上的颜色配置主题，从而避免了被终端主题所影响。</p>
 ]]></content>
     </entry>
     <entry>
@@ -80,65 +113,11 @@ sudo make altinstall
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[Windows Terminal+WSL2+Zsh configuration]]></title>
-        <id>https://leaf7th.github.io/post/wtwsl2zsh-configuration/</id>
-        <link href="https://leaf7th.github.io/post/wtwsl2zsh-configuration/">
-        </link>
-        <updated>2020-08-28T12:00:00.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="前言">前言</h1>
-<p>本文记录了一些Windows Terminal+WSL2的配置方法</p>
-<h1 id="wsl2">WSL2</h1>
-<p><a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10">## Install the Windows Subsystem for Linux</a></p>
-<h1 id="windows-terminal">Windows Terminal</h1>
-<p>下载很简单，Windows store直接下载，接下来是配置</p>
-<p><a href="https://docs.microsoft.com/en-us/windows/terminal/customize-settings/profile-settings">Profile settings in Windows Terminal</a></p>
-<p><a href="https://atomcorp.github.io/themes/">可视化的 Windows Terminal 配色方案选择器</a></p>
-<h1 id="zsh">Zsh</h1>
-<pre><code class="language-bash">sudo apt install zsh # Install
-
-chsh -s /bin/zsh # Set to defalut shell
-
-sh -c &quot;$(wget https://raw.github.com/robbyrussell/oh-myzsh/master/tools/install.sh -O -)&quot; # On-my-zsh
-
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting # Plugins
-mkdir ~/.oh-my-zsh/plugins/incr
-wget http://mimosa-pudica.net/src/incr-0.2.zsh -O ~/.oh-myzsh/plugins/incr/incr.plugin.zsh
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-myzsh/custom}/plugins/zsh-autosuggestions
-sudo apt install autojump
-</code></pre>
-<p>然后 <code>vim .zshrc</code></p>
-<p>修改 <code>plugins=(git zsh-syntax-highlighting)</code></p>
-<p>添加</p>
-<pre><code class="language-bash">source ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zshautosuggestions.plugin.zsh
-source /usr/share/autojump/autojump.sh
-source ~/.oh-my-zsh/plugins/incr/incr*.zsh
-</code></pre>
-<h1 id="powershell">Powershell</h1>
-<h2 id="powershell-7">Powershell 7</h2>
-<p><a href="https://docs.microsoft.com/zh-cn/powershell/scripting/install/installing-powershell-core-on-windows?view=powershell-7">在 Windows 上安装 PowerShell</a></p>
-<h2 id="powerline">Powerline</h2>
-<p><a href="https://docs.microsoft.com/en-us/windows/terminal/tutorials/powerline-setup">Tutorial: Set up Powerline in Windows Terminal</a></p>
-<p>字体同样设置给WSL2</p>
-<h2 id="配置ssh-tab">配置SSH Tab</h2>
-<p>处理私钥权限问题，详见<a href="https://leaf7th.github.io/post/windows-zhe-teng-ri-ji/#ssh-key-bad-permission">Windowns 折腾日记</a></p>
-<p>在Windows Terminal的<code>setting.json</code>中添加</p>
-<pre><code>{
-    &quot;guid&quot;: &quot;{xxxx}&quot;,
-    &quot;hidden&quot;: false,
-    &quot;name&quot;: &quot;Tabname&quot;,
-    &quot;colorScheme&quot;: &quot;WildCherry&quot;,
-    &quot;commandline&quot; : &quot;ssh command&quot;
-}
-</code></pre>
-<p>其中，commandline用于处填写ssh命令，guid使用<a href="https://www.guidgen.com/">Create GUIDs online</a>来生成。</p>
-]]></content>
-    </entry>
-    <entry>
         <title type="html"><![CDATA[Writeup-HackTheBox-OpenAdmin]]></title>
         <id>https://leaf7th.github.io/post/writeup-hackthebox-openadmin/</id>
         <link href="https://leaf7th.github.io/post/writeup-hackthebox-openadmin/">
         </link>
-        <updated>2020-01-09T04:00:00.000Z</updated>
+        <updated>2020-01-09T06:00:00.000Z</updated>
         <content type="html"><![CDATA[<p>感谢Richard推荐的这台Beginner machine，以及整个过程中的提示与帮助</p>
 <h2 id="foothold">Foothold</h2>
 <p>渗透HTB的Machine要先连接他们的VPN，一开始忘了这个浪费好多时间</p>

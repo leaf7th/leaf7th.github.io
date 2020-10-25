@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Windows 折腾日记 | Nook&#39;s blog</title>
-<link rel="shortcut icon" href="https://leaf7th.github.io/favicon.ico?v=1602260016265">
+<link rel="shortcut icon" href="https://leaf7th.github.io/favicon.ico?v=1603644928234">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://leaf7th.github.io/styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="Windows 折腾日记 | Nook&#39;s blog - Atom Feed" href="https://leaf7th.github.io/atom.xml">
@@ -13,8 +13,10 @@
 
     <meta name="description" content="前言
 Windows下很多问题折腾起来太费劲了，记录一下踩过的坑
-SSH key bad permission
-Windows下也可以使用openssh来进行ssh连接，但是在使用private key的时候会碰到bad permissio..." />
+WSL2
+## Install the Windows Subsystem for Linux
+Windows Terminal
+下载很简单，Windows store直接下..." />
     <meta name="keywords" content="Windows" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
@@ -24,7 +26,7 @@ Windows下也可以使用openssh来进行ssh连接，但是在使用private key�
       <div class="main-content">
         <div class="site-header">
   <a href="https://leaf7th.github.io">
-  <img class="avatar" src="https://leaf7th.github.io/images/avatar.png?v=1602260016265" alt="">
+  <img class="avatar" src="https://leaf7th.github.io/images/avatar.png?v=1603644928234" alt="">
   </a>
   <h1 class="site-title">
     Nook&#39;s blog
@@ -84,7 +86,7 @@ Windows下也可以使用openssh来进行ssh连接，但是在使用private key�
                 2020-10-10
               </span>
               <span>
-                2 min read
+                3 min read
               </span>
               
                 <a href="https://leaf7th.github.io/tag/ECyTczwyP/" class="post-tag">
@@ -97,6 +99,12 @@ Windows下也可以使用openssh来进行ssh连接，但是在使用private key�
               <div class="post-content">
                 <h1 id="前言">前言</h1>
 <p>Windows下很多问题折腾起来太费劲了，记录一下踩过的坑</p>
+<h1 id="wsl2">WSL2</h1>
+<p><a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10">## Install the Windows Subsystem for Linux</a></p>
+<h1 id="windows-terminal">Windows Terminal</h1>
+<p>下载很简单，Windows store直接下载，接下来是配置</p>
+<p><a href="https://docs.microsoft.com/en-us/windows/terminal/customize-settings/profile-settings">Profile settings in Windows Terminal</a></p>
+<p><a href="https://atomcorp.github.io/themes/">可视化的 Windows Terminal 配色方案选择器</a></p>
 <h1 id="ssh-key-bad-permission">SSH key bad permission</h1>
 <p>Windows下也可以使用openssh来进行ssh连接，但是在使用private key的时候会碰到bad permission的问题。在Linux下这个问题非常容易解决，只需要 <code>chmod 600 keyname</code> 就好了，但是Windows的权限管理非常麻烦。</p>
 <p>一个普遍的解决办法是：</p>
@@ -122,12 +130,50 @@ icacls ${key} /c /t /Remove Administrator &quot;Authenticated Users&quot; BUILTI
 icacls ${key}
 </code></pre>
 <p>这样就可以正确的设置private key权限了。</p>
+<h1 id="配置ssh-tab">配置SSH Tab</h1>
+<p>处理私钥权限问题，详见<a href="https://leaf7th.github.io/post/windows-zhe-teng-ri-ji/#ssh-key-bad-permission"> SSH key bad permission </a></p>
+<p>在Windows Terminal的<code>setting.json</code>中添加</p>
+<pre><code>{
+    &quot;guid&quot;: &quot;{xxxx}&quot;,
+    &quot;hidden&quot;: false,
+    &quot;name&quot;: &quot;Tabname&quot;,
+    &quot;colorScheme&quot;: &quot;WildCherry&quot;,
+    &quot;commandline&quot; : &quot;ssh command&quot;
+}
+</code></pre>
+<p>其中，commandline用于处填写ssh命令，guid使用<a href="https://www.guidgen.com/">Create GUIDs online</a>来生成。</p>
+<h1 id="powershell">Powershell</h1>
+<h2 id="powershell-7">Powershell 7</h2>
+<p><a href="https://docs.microsoft.com/zh-cn/powershell/scripting/install/installing-powershell-core-on-windows?view=powershell-7">在 Windows 上安装 PowerShell</a></p>
+<h2 id="powerline">Powerline</h2>
+<p><a href="https://docs.microsoft.com/en-us/windows/terminal/tutorials/powerline-setup">Tutorial: Set up Powerline in Windows Terminal</a></p>
+<p>字体同样设置给WSL2</p>
+<h2 id="device-or-resource-busy">Device or resource busy</h2>
+<p>如果使用Docker-desktop+WSL2来运行容器并挂载到WSL2目录，那么在删除容器后该目录会一直无法删除，提示Device or resource busy。</p>
+<p>常用的方法是<code>lsof +D path</code>和<code>umount path</code>，无效</p>
+<p>用<code>docker volume rm $(docker volume ls -qf dangling=true)</code>删除孤单卷，无效</p>
+<p>在proc中的mountinfo可以看到忙碌目录挂载到了windows中，所以关闭Docker-desktop即可删除</p>
+<h1 id="wsl2中的vim">WSL2中的Vim</h1>
+<p>WT的自定义主题可以让shell看起来更漂亮，但是这会影响vim中语法高亮错误提示的效果。</p>
+<p>一个简单的解决办法是，尝试一种能和当前Terminal主题适应的比较好的vim主题并微调</p>
+<p>另一个解决办法是开启vim的真彩色。因为Terminal主题中更改的是0~15的颜色映射，如果终端支持真彩色，那么vim就可以使用16以上的颜色配置主题，从而避免了被终端主题所影响。</p>
 
               </div>
               <div class="toc-container">
                 <ul class="markdownIt-TOC">
 <li><a href="#%E5%89%8D%E8%A8%80">前言</a></li>
+<li><a href="#wsl2">WSL2</a></li>
+<li><a href="#windows-terminal">Windows Terminal</a></li>
 <li><a href="#ssh-key-bad-permission">SSH key bad permission</a></li>
+<li><a href="#%E9%85%8D%E7%BD%AEssh-tab">配置SSH Tab</a></li>
+<li><a href="#powershell">Powershell</a>
+<ul>
+<li><a href="#powershell-7">Powershell 7</a></li>
+<li><a href="#powerline">Powerline</a></li>
+<li><a href="#device-or-resource-busy">Device or resource busy</a></li>
+</ul>
+</li>
+<li><a href="#wsl2%E4%B8%AD%E7%9A%84vim">WSL2中的Vim</a></li>
 </ul>
 
               </div>
